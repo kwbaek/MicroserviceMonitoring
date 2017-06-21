@@ -14,3 +14,13 @@ msdemoapi/node_modules/*
 .plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs
 .plugins/org.eclipse.ui.workbench/workingsets.xml
 .plugins/org.eclipse.team.cvs.core
+product-review-app/.settings/*
+product-detail-app/.settings/*
+product-inventory-app/.settings
+
+
+
+
+
+
+
