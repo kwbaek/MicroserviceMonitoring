@@ -1,0 +1,42 @@
+'use strict';
+//var config = require('./config');
+
+
+var http = require('http');
+
+var extServerOptions = {
+    host: 'localhost',
+    port: '8080',
+    path: '/prodreview/count/',
+    method: 'GET'
+};
+
+exports.read_prod_info = function(req, res) {
+  var productId = req.params.productId;
+  Task.find({}, function(err, task) {
+    if (err)
+      res.send(err);
+    res.json(task);
+  });
+};
+
+
+// do the GET request
+var reqGet = https.request(optionsget, function(res) {
+	console.log("statusCode: ", res.statusCode);
+	// uncomment it for header details
+//	console.log("headers: ", res.headers);
+
+
+	res.on('data', function(d) {
+		console.info('GET result:\n');
+		process.stdout.write(d);
+		console.info('\n\nCall completed');
+	});
+
+});
+
+reqGet.end();
+reqGet.on('error', function(e) {
+	console.error(e);
+});

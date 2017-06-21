@@ -1,0 +1,4 @@
+RemoteSystemsTempFiles/*
+Servers/*
+msdemoapi/node_modules/*
+*.jar

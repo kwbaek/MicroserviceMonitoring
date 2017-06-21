@@ -1,0 +1,25 @@
+server:
+  port: 8081
+logging:
+  file: /var/log/product-review.log
+  level:
+    org.springframework: INFO,
+    com.nishant.mssample: INFO
+spring:
+  application:
+    # This ends up as the service name in zipkin
+    name: ${APP_NAME:product-review}
+  
+  data:
+    mongodb:
+      uri: mongodb://localhost/product-reivew
+  cloud:
+    consul:
+      host: ${CONSUL_SERVER:127.0.0.1}
+      port: 8500
+      config:
+        fail-fast: false
+      discovery:
+        preferIpAddress: true
+       # instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    

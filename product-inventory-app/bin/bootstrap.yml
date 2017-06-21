@@ -1,0 +1,29 @@
+server:
+  port: 8083
+logging:
+  file: /var/log/product-inventory.log
+  level:
+    org.springframework: INFO
+spring:
+  application:
+    # This ends up as the service name in zipkin
+    name: product-inventory
+  zipkin:
+    # Uncomment to send to zipkin, replacing 192.168.99.100 with your zipkin IP address
+    baseUrl: ${ZIPKIN_URL:http://172.18.0.8:9411/}
+  sleuth:
+    sampler:
+      percentage: 1.0
+  data:
+    mongodb:
+      uri: mongodb://localhost/product-inventory
+  cloud:
+    consul:
+      host: ${CONSUL_SERVER:localhost}
+      port: 8500
+      config:
+        fail-fast: false
+      discovery:
+        preferIpAddress: true
+       # instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    
