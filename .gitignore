@@ -17,8 +17,8 @@ msdemoapi/node_modules/*
 product-review-app/.settings/*
 product-detail-app/.settings/*
 product-inventory-app/.settings
-
-
+*.project
+*.classpath
 
 
 
