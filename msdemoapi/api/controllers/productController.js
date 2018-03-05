@@ -10,13 +10,14 @@ const {recorder} = require('../../recorder');
 const CLSContext = require('zipkin-context-cls');
 const ctxImpl = new CLSContext('zipkin');
 const tracer = new Tracer({ctxImpl, recorder});
-const zipkinRest = rest.wrap(restInterceptor, {tracer, serviceName: 'msdemoapi'});
+const zipkinRest = rest.wrap(restInterceptor, {tracer, serviceName: 'prod-info'});
 
 //Service Orchestration Using NODEJS Async module.
 //Product Review - Spring Boot App
 //Product Detail - Spring Boot App
 //Product Inventory - Spring Boot App
 
+const {logger} = require('../../logger');
 
 exports.read_prod_info = function(req, res) {
   var productId = req.params.productId;
@@ -25,21 +26,21 @@ var productInfo = {};
 async.parallel([
     function(callback) {
 	console.log('prodreview spring app to be called');
-      zipkinRest('http://localhost:8080' + '/prodreview/count/'+productId)
+      zipkinRest('http://35.196.150.249:8081' + '/prodreview/count/'+productId)
     .then(response => productInfo.productReview=response.entity)
     .catch(err => console.error('Error', err.stack));
       callback();
     },
     function(callback) {
 console.log('proddetail spring app to be called');
-      zipkinRest('http://localhost:8081' + '/proddetail/'+productId)
+      zipkinRest('http://35.196.237.120:8082' + '/proddetail/'+productId)
     .then(response => productInfo.productDetail=response.entity)
     .catch(err => console.error('Error', err.stack));
       callback();
     },
     function(callback) {
 console.log('prodinventory spring app to be called');
-      zipkinRest('http://localhost:8082' + '/prodinventory/'+productId)
+      zipkinRest('http://104.196.142.41:8083' + '/prodinventory/'+productId)
     .then(response => productInfo.productInventory=response.entity)
     .catch(err => console.error('Error', err.stack));
       callback();
@@ -47,6 +48,8 @@ console.log('prodinventory spring app to be called');
   ],function(err,data) {
 	console.log(err)
 	console.log(productInfo)
+logger.log('info', 'Prod Info Service Called!', 
+    { 'serviceName':'prod-info', 'TraceId': req.header('X-B3-TraceId'), 'SpanId': req.header('X-B3-SpanId') });
 	if(typeof err != 'undefined' && err)
   		res.send(401,productInfo)
 	else

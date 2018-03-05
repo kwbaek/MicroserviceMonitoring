@@ -27,6 +27,10 @@ public class ProductReviewController {
     @RequestMapping(value = "/prodreview/count/{itemid}", method = RequestMethod.GET)
     public List<ProductReviewCount> getRatingCounts(@PathVariable("itemid") String id) {
     	LOG.log(Level.INFO," In ProductReviewController getRatingCounts");
+try{        
+Thread.sleep(10000);
+} catch (InterruptedException e){
+}
         return productReviewService.getRatingCounts(id);
     }
 }

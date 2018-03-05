@@ -1,0 +1,19 @@
+server:  
+  port: ${PORT:3333}
+  
+
+spring:  
+  application:
+    name: customer-service
+  zipkin:
+    # Uncomment to send to zipkin, replacing 192.168.99.100 with your zipkin IP address
+    baseUrl: ${ZIPKIN_URL:http://172.18.0.8:9411/}
+  sleuth: 
+    sampler:
+      percentage: 1.0
+    
+    
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG

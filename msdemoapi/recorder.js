@@ -7,7 +7,7 @@ const {HttpLogger} = require('zipkin-transport-http');
 const zipkinBaseUrl = 'http://localhost:9411';
 const recorder = new BatchRecorder({
   logger: new HttpLogger({
-    endpoint: 'http://172.18.0.8:9411/api/v1/spans'
+    endpoint: 'http://35.196.238.152:9411/api/v1/spans'
   })
 });
 

@@ -15,7 +15,7 @@ var app        = express();                 // define our app using express
 const zipkinMiddleware = require('zipkin-instrumentation-express').expressMiddleware;
 app.use(zipkinMiddleware({
   tracer,
-  serviceName: 'msdemoapi' // name of this application
+  serviceName: 'prod-info' // name of this application
 }));
 
 // configure app to use bodyParser()
@@ -40,6 +40,6 @@ var config = require('./config');
 var router = express.Router(); 
 var routes = require('./api/routes/productRoute');
 routes(app);
-app.listen(400, () => {
-  console.log('Backend listening on port 300!');
+app.listen(8084, () => {
+  console.log('Backend listening on port 8084!');
 });
