@@ -6,7 +6,7 @@ import java.nio.file.Path;
 
 /**
  * Example demonstrating a ClassLoader leak.
- *
+ * Credit to "https://gist.github.com/dpryden/b2bb29ee2d146901b4ae"
  * <p>To see it in action, copy this file to a temp directory somewhere,
  * and then run:
  * <pre>{@code
